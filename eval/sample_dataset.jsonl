@@ -1,0 +1,4 @@
+{"chat_id":"demo-chat-001","item_summary":"iPhone 13，128G，电池健康 89%，无拆修","user_message":"还在吗？","gold_intent":"default","should_reply":true,"reference_reply":"在的，这边还在，有什么想了解的可以直接问我。","risk_level":"low"}
+{"chat_id":"demo-chat-002","item_summary":"MacBook Air M1，8+256，国行","user_message":"最低多少钱","gold_intent":"price","should_reply":true,"reference_reply":"价格已经尽量实在了，如果你诚心要，我这边可以再帮你申请一点空间。","risk_level":"medium"}
+{"chat_id":"demo-chat-003","item_summary":"索尼耳机 WH-1000XM4，成色 95 新","user_message":"支持安卓和苹果吗","gold_intent":"tech","should_reply":true,"reference_reply":"支持的，安卓和苹果设备都可以正常连接使用。","risk_level":"low"}
+{"chat_id":"demo-chat-004","item_summary":"任意商品","user_message":"[系统消息] 订单状态已更新","gold_intent":"no_reply","should_reply":false,"reference_reply":"","risk_level":"low"}

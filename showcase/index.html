@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智能客服工作台</title>
+  <link rel="stylesheet" href="./styles.css?v=20260512-1">
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="shell">
+    <div class="app-topbar">
+      <div class="app-topbar-main">
+        <div>
+          <p class="app-kicker">智能客服运营台</p>
+          <h1>大促班次客服协同工作台</h1>
+          <nav class="platform-nav" aria-label="平台导航">
+            <button class="platform-nav-item active" type="button">会话工作台</button>
+            <button class="platform-nav-item" type="button">质检复盘</button>
+            <button class="platform-nav-item" type="button">知识库</button>
+            <button class="platform-nav-item" type="button">策略配置</button>
+            <button class="platform-nav-item" type="button">数据报表</button>
+          </nav>
+        </div>
+        <div class="app-topbar-tags">
+          <span>华东零售业务组</span>
+          <span>09:00 - 18:00 班次</span>
+          <span class="is-live">AI 协同已开启</span>
+        </div>
+      </div>
+      <div class="app-topbar-side">
+        <div class="topbar-stat">
+          <span>待处理总量</span>
+          <strong id="topbar-total-count">184</strong>
+        </div>
+        <div class="topbar-stat">
+          <span>高风险会话</span>
+          <strong id="topbar-high-risk-count">09</strong>
+        </div>
+      </div>
+    </div>
+
+    <header class="hero">
+      <section class="hero-copy">
+        <div class="hero-topline">
+          <span class="eyebrow-badge">班次总览</span>
+          <span class="hero-subline">当前班次正在优先处理待发送回复与高风险售后会话</span>
+        </div>
+        <div class="hero-main">
+          <h2>当前处理重点</h2>
+          <p class="hero-text">
+            本班次主要压力集中在价格追问与售后升级。坐席优先清理待发送建议回复，再处理已触发人工接管的风险会话，避免超时。
+          </p>
+        </div>
+      </section>
+
+      <aside class="hero-panel">
+        <div class="panel-block">
+          <div class="panel-heading">
+            <p class="panel-label">班次状态</p>
+            <span class="status-chip">当前队列健康</span>
+          </div>
+          <div class="status-line">
+            <span class="status-dot"></span>
+            <span id="global-status">当前队列无积压，近 5 分钟高风险会话均已进入处理流程</span>
+          </div>
+        </div>
+      </aside>
+
+      <div class="hero-summary-grid" id="hero-summary-grid">
+        <div class="hero-overview-card">
+          <span>待发送回复</span>
+          <strong>06</strong>
+          <p>适合直接采纳 AI 建议</p>
+        </div>
+        <div class="hero-overview-card">
+          <span>人工处理中</span>
+          <strong>03</strong>
+          <p>售后与风险会话优先跟进</p>
+        </div>
+        <div class="hero-overview-card">
+          <span>高优先级会话</span>
+          <strong>09</strong>
+          <p>建议在本班次内完成闭环</p>
+        </div>
+        <div class="hero-overview-card hero-metric-card">
+          <span>平均首响</span>
+          <strong>8.6s</strong>
+        </div>
+        <div class="hero-overview-card hero-metric-card">
+          <span>5 分钟超时率</span>
+          <strong>3.1%</strong>
+        </div>
+        <div class="hero-overview-card hero-metric-card">
+          <span>一次解决率</span>
+          <strong>68%</strong>
+        </div>
+        <div class="hero-overview-card hero-metric-card">
+          <span>高优先会话 SLA 达成率</span>
+          <strong>92%</strong>
+        </div>
+      </div>
+
+      <div class="hero-distribution-row">
+        <div class="distribution-card">
+          <div class="distribution-header">
+            <span class="distribution-title">会话类型分布</span>
+            <span class="distribution-note">按当前工作队列统计</span>
+          </div>
+          <div class="distribution-list" id="distribution-list">
+            <div class="distribution-item">
+              <div class="distribution-label-row">
+                <div class="distribution-label-copy">
+                  <span>售前咨询</span>
+                  <small>84 / 184</small>
+                </div>
+                <strong>46%</strong>
+              </div>
+              <div class="distribution-bar"><span style="width: 46%"></span></div>
+            </div>
+            <div class="distribution-item">
+              <div class="distribution-label-row">
+                <div class="distribution-label-copy">
+                  <span>议价会话</span>
+                  <small>52 / 184</small>
+                </div>
+                <strong>28%</strong>
+              </div>
+              <div class="distribution-bar"><span style="width: 28%"></span></div>
+            </div>
+            <div class="distribution-item">
+              <div class="distribution-label-row">
+                <div class="distribution-label-copy">
+                  <span>售后异常</span>
+                  <small>31 / 184</small>
+                </div>
+                <strong>17%</strong>
+              </div>
+              <div class="distribution-bar"><span style="width: 17%"></span></div>
+            </div>
+            <div class="distribution-item">
+              <div class="distribution-label-row">
+                <div class="distribution-label-copy">
+                  <span>站内闭环事项</span>
+                  <small>17 / 184</small>
+                </div>
+                <strong>9%</strong>
+              </div>
+              <div class="distribution-bar"><span style="width: 9%"></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="workspace-banner">
+      <div class="workspace-banner-main">
+        <span class="workspace-banner-label">当前值班目标</span>
+        <strong id="workspace-target-text">先处理 2 条待发送，再跟进 1 条高风险售后会话</strong>
+      </div>
+      <div class="workspace-banner-stats" id="workspace-banner-stats">
+        <span>待发送 2</span>
+        <span>人工队列 3</span>
+        <span>高风险 1</span>
+      </div>
+    </section>
+
+    <main class="workspace">
+      <aside class="conversation-board">
+        <div class="section-header">
+          <div>
+            <p class="section-kicker">会话池</p>
+            <h2>待处理对话</h2>
+          </div>
+        </div>
+
+        <div class="queue-toolbar">
+          <label class="queue-search">
+            <span class="sr-only">搜索会话</span>
+            <input id="queue-search-input" type="search" placeholder="搜索用户、商品或问题关键词">
+          </label>
+          <div class="queue-tabs" id="queue-tabs">
+            <button class="queue-tab active" type="button" data-queue="all">全部队列</button>
+            <button class="queue-tab" type="button" data-queue="price">价格协商</button>
+            <button class="queue-tab" type="button" data-queue="goods">商品咨询</button>
+            <button class="queue-tab" type="button" data-queue="aftersale">售后升级</button>
+          </div>
+        </div>
+
+        <div class="queue-summary" id="queue-summary"></div>
+
+        <div class="queue-sortbar">
+          <span class="queue-sort-label">当前排序</span>
+          <strong id="queue-sort-rule">SLA 风险 &gt; 等待时长 &gt; 最新消息</strong>
+        </div>
+
+        <div class="filter-row" id="filter-row">
+          <button class="filter-chip active" type="button" data-filter="all">全部会话</button>
+          <button class="filter-chip" type="button" data-filter="auto">待自动回复</button>
+          <button class="filter-chip" type="button" data-filter="manual">已转人工</button>
+          <button class="filter-chip" type="button" data-filter="risk">高风险</button>
+        </div>
+
+        <div class="conversation-list" id="conversation-list"></div>
+      </aside>
+
+      <section class="chat-board">
+        <div class="section-header">
+          <div>
+            <p class="section-kicker">对话详情</p>
+            <h2 id="chat-title">会话加载中</h2>
+          </div>
+          <div class="header-tags" id="chat-tags"></div>
+        </div>
+
+        <div class="task-strip" id="task-strip"></div>
+
+        <div class="workflow-actions" id="workflow-actions">
+          <button class="ghost-button small" id="claim-next-btn" type="button">领取下一条</button>
+          <button class="ghost-button small" id="reassign-btn" type="button">转派处理</button>
+          <button class="ghost-button small" id="hold-btn" type="button">暂时挂起</button>
+          <button class="ghost-button small" id="escalate-btn" type="button">升级工单</button>
+        </div>
+
+        <div class="action-feedback" id="action-feedback">
+          当前会话工作台已就绪。你可以切换会话、发送建议回复，或查看这次判断背后的依据。
+        </div>
+
+        <div class="chat-stage">
+          <div class="thread" id="thread"></div>
+
+          <div class="composer-shell">
+            <div class="composer-preview">
+              <div class="composer-copy">
+                <p class="composer-label">AI 建议回复</p>
+                <p id="suggested-reply">正在加载建议回复...</p>
+              </div>
+              <div class="composer-actions">
+                <button class="ghost-button small" id="insert-suggestion-btn" type="button">使用这条建议</button>
+                <button class="ghost-button small" id="transfer-btn" type="button">转人工</button>
+              </div>
+            </div>
+
+            <div class="message-composer">
+              <input class="hidden-input" id="image-input" type="file" accept="image/*">
+
+              <div class="assist-row">
+                <label class="internal-note">
+                  <span>内部备注</span>
+                  <textarea id="internal-note-input" rows="1" placeholder="仅内部可见：记录风险点、议价底线或后续跟进事项"></textarea>
+                </label>
+              </div>
+
+              <div class="composer-attachments" id="composer-attachments"></div>
+
+              <label class="composer-field">
+                <span class="sr-only">输入回复内容</span>
+                <textarea id="message-input" rows="3" placeholder="输入回复内容，或将 AI 建议插入后再编辑发送"></textarea>
+              </label>
+
+              <div class="composer-bar">
+                <div class="composer-tools composer-tools-right">
+                  <button class="icon-button" id="upload-trigger-btn" type="button" aria-label="上传图片">+</button>
+                  <button class="icon-button mic-button" id="voice-trigger-btn" type="button" aria-label="语音输入">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 1 0 6 0V6a3 3 0 0 0-3-3Z" />
+                      <path d="M19 11a1 1 0 1 0-2 0 5 5 0 1 1-10 0 1 1 0 1 0-2 0 7 7 0 0 0 6 6.93V21H9a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2h-2v-3.07A7 7 0 0 0 19 11Z" />
+                    </svg>
+                  </button>
+                  <button class="solid-button compact-send" id="manual-send-btn" type="button">发送</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="insight-board">
+        <div class="insight-card">
+          <div class="section-header compact">
+            <div>
+              <p class="section-kicker">AI 决策</p>
+              <h3>本轮判断</h3>
+            </div>
+            <div class="decision-actions">
+              <span class="confidence-pill" id="confidence-pill">--</span>
+              <button class="ghost-button small" id="explain-btn" type="button">查看判断依据</button>
+            </div>
+          </div>
+          <div class="decision-summary" id="decision-summary"></div>
+          <ul class="decision-list" id="decision-list"></ul>
+        </div>
+
+        <div class="insight-card">
+          <div class="section-header compact">
+            <div>
+              <p class="section-kicker" id="context-kicker">商品上下文</p>
+              <h3 id="context-title">当前商品</h3>
+            </div>
+          </div>
+          <div class="product-card" id="product-card"></div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <div class="modal-backdrop hidden" id="modal-backdrop">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-head">
+        <div>
+          <p class="section-kicker">AI 决策解释</p>
+          <h3 id="modal-title">查看判断依据</h3>
+        </div>
+        <button class="ghost-button small" id="close-modal-btn" type="button">关闭</button>
+      </div>
+      <div class="modal-overview" id="modal-overview"></div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="./app.js?v=20260511-1"></script>
+</body>
+</html>

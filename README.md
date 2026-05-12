@@ -1,158 +1,234 @@
-# 🚀 Xianyu AutoAgent - 智能闲鱼客服机器人系统
+# AI 智能客服协同工作台
 
-[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue)](https://www.python.org/) [![LLM Powered](https://img.shields.io/badge/LLM-powered-FF6F61)](https://platform.openai.com/)
+[![Frontend Prototype](https://img.shields.io/badge/Frontend-Workstation%20Prototype-0f766e)](#-项目概述)
+[![Intent Recognition](https://img.shields.io/badge/AI-Intent%20Recognition-2563eb)](#-ai-能力设计)
+[![Reply Recommendation](https://img.shields.io/badge/AI-Reply%20Recommendation-7c3aed)](#-ai-能力设计)
+[![Risk Detection](https://img.shields.io/badge/AI-Risk%20Detection-d97706)](#-ai-能力设计)
+[![Human Handoff](https://img.shields.io/badge/AI-Human%20Handoff-059669)](#-ai-能力设计)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 
-专为闲鱼平台打造的AI值守解决方案，实现闲鱼平台7×24小时自动化值守，支持多专家协同决策、智能议价和上下文感知对话。 
+> 一个面向电商客服场景的 AI 协同工作台项目，用于承载会话队列、客服处理流程、AI 判断结果与业务上下文，重点解决“多会话并行处理下，客服如何更快判断、回复与转派”的问题。
 
+当前仓库对外展示的核心内容是 `showcase/` 中的前端工作台原型。该版本聚焦于产品结构、信息组织、交互流程和 AI 协同方式的验证，页面中的会话、指标和动作流转由前端状态模拟完成，便于独立预览与演示。
 
-## 🌟 核心特性
+![AI 智能客服协同工作台预览](./showcase/preview.png)
 
-### 智能对话引擎
-| 功能模块   | 技术实现            | 关键特性                                                     |
-| ---------- | ------------------- | ------------------------------------------------------------ |
-| 上下文感知 | 会话历史存储        | 轻量级对话记忆管理，完整对话历史作为LLM上下文输入            |
-| 专家路由   | LLM prompt+规则路由 | 基于提示工程的意图识别 → 专家Agent动态分发，支持议价/技术/客服多场景切换 |
+## 📌 项目概述
 
-### 业务功能矩阵
-| 模块     | 已实现                        | 规划中                       |
-| -------- | ----------------------------- | ---------------------------- |
-| 核心引擎 | ✅ LLM自动回复<br>✅ 上下文管理 | 🔄 情感分析增强               |
-| 议价系统 | ✅ 阶梯降价策略                | 🔄 市场比价功能               |
-| 技术支持 | ✅ 网络搜索整合                | 🔄 RAG知识库增强              |
-| 运维监控 | ✅ 基础日志                    | 🔄 钉钉集成<br>🔄  Web管理界面 |
+在客服实际工作中，问题往往不只是“生成一句回复”，而是：
 
-## 🎨效果图
-<div align="center">
-  <img src="./images/demo1.png" width="600" alt="客服">
-  <br>
-  <em>图1: 客服随叫随到</em>
-</div>
+- 多条会话同时进入队列时，应该先处理哪一条
+- 哪些会话适合直接采用 AI 建议，哪些必须转人工
+- 商品咨询、价格协商、履约确认、售后异常、高风险场景分别需要什么上下文
+- 如何让坐席在有限时间内同时看清 SLA、风险、优先级和处理建议
 
+本项目围绕以上问题设计了一套客服协同工作台，强调以下目标：
 
-<div align="center">
-  <img src="./images/demo2.png" width="600" alt="议价专家">
-  <br>
-  <em>图2: 阶梯式议价</em>
-</div>
+- 让会话处理顺序可见、可解释、可操作
+- 让 AI 建议不是独立输出，而是嵌入客服工作流
+- 让业务上下文跟随场景变化，而不是统一塞进一个固定卡片
+- 让界面信息密度服务于处理效率，而不是只做展示
 
-<div align="center">
-  <img src="./images/demo3.png" width="600" alt="技术专家"> 
-  <br>
-  <em>图3: 技术专家上场</em>
-</div>
+## ✨ 项目亮点
 
-<div align="center">
-  <img src="./images/log.png" width="600" alt="后台log"> 
-  <br>
-  <em>图4: 后台log</em>
-</div>
+- 三栏式客服工作台布局，覆盖队列、会话、决策与上下文
+- 动态总览指标，由当前会话数据实时计算
+- 支持多种客服场景切换，包括商品咨询、价格协商、售后异常和高风险会话
+- 具备完整的 AI 协同处理链路：识别、判断、建议、转派、升级、接管
+- 将“意图识别”“风险识别”“人工接管触发”“可解释判断”融入页面结构与交互中
 
+## 🤖 AI 能力设计
 
-## 🚴 快速开始
-小白请直接查看[保姆级教学文档](https://my.feishu.cn/wiki/JtkBwkI9GiokZikVdyNceEfZncE)
-### 环境要求
-- Python 3.8+
+这份仓库虽然当前公开版本以静态前端原型为主，但页面中表达的不是简单的“聊天 UI”，而是一套完整的 AI 客服协同能力设计。
 
-### 安装步骤
+### AI 能力一览
+
+| AI 能力 | 说明 | 页面中的体现 | 当前版本实现方式 |
+| --- | --- | --- | --- |
+| 意图识别 | 判断当前会话属于商品咨询、价格协商、售后异常、履约确认等哪类问题 | 右侧 `意图识别` 字段、不同场景的上下文切换 | 以前端模拟数据驱动，用于验证工作台信息结构 |
+| 回复推荐 | 根据会话内容生成建议回复，辅助坐席快速处理 | 中间区域的 `AI 建议回复`、`使用这条建议` 按钮 | 以前端状态模拟推荐结果与操作流转 |
+| 风险识别 | 识别高风险、临近 SLA、需人工介入或升级的会话 | 顶部指标、左侧队列排序、右侧状态判断 | 以前端规则与会话字段模拟风险信号 |
+| 人工接管触发 | 在 AI 不适合自动处理时触发转人工、转派或升级 | `转人工`、`转派处理`、`升级工单` 等动作 | 以前端状态机模拟处理动作 |
+| 置信度评估 | 给出当前判断或建议的可信度，帮助坐席衡量是否采纳 | 右侧 `置信度` 标签 | 以前端展示层模拟置信度输出 |
+| 上下文路由 | 根据场景展示不同的辅助信息，而不是固定一张商品卡 | 价格咨询显示商品卡，售后/风险显示人工复核与策略信息 | 以前端条件渲染模拟不同上下文面板 |
+| 可解释判断 | 不只给结论，还解释为什么推荐自动回复或人工介入 | `查看判断依据`、AI 决策卡 | 以前端结构化字段模拟解释链路 |
+| 队列优先级决策 | 按风险、SLA、等待时长等信号决定处理顺序 | 左侧会话列表排序规则 | 以前端排序逻辑真实执行 |
+
+### 这份项目里体现出的 AI 侧理解
+
+- **意图识别**：AI 不只是“会回一句话”，而是先识别用户问题属于哪类客服场景，再决定需要展示哪些上下文和动作。
+- **风险识别**：对于售后争议、高风险或临近 SLA 的会话，系统需要优先调度，而不是把它们和普通咨询混在一起。
+- **回复推荐**：AI 的价值不只是自动发送，更重要的是给出可编辑、可采纳、可拒绝的建议回复。
+- **人工接管**：当会话超出自动处理边界时，系统应明确触发转人工、转派处理、升级工单，而不是继续盲目自动化。
+- **可解释性**：AI 判断必须能说明依据，否则坐席很难在高压场景下快速建立信任。
+
+## 🧩 核心能力
+
+### 1. 会话队列调度
+
+- 支持按 `高风险 > 临近 SLA > 等待时长 > 最新消息` 的规则排序
+- 支持按队列、是否待自动回复、是否已转人工、高风险等维度筛选
+- 在会话卡中展示等待时长、SLA、负责人、锁定状态等调度信号
+
+### 2. AI 协同处理
+
+- 展示 AI 建议回复与当前动作建议
+- 展示是否适合自动回复、置信度、人工接管状态
+- 提供判断依据查看入口，支持将“结论”和“依据”分层呈现
+
+### 3. 业务上下文切换
+
+- 价格咨询场景显示商品上下文
+- 售后 / 风险场景切换为人工复核或风控信息
+- 根据当前会话类型动态更新右侧辅助决策区域
+
+### 4. 生产动作闭环
+
+- 领取下一条
+- 转派处理
+- 暂时挂起
+- 升级工单
+- 使用建议回复
+- 转人工
+
+### 5. 动态总览指标
+
+页面顶部与总览区域指标由前端数据动态计算，包括：
+
+- 待发送回复
+- 人工处理中
+- 高优先级会话
+- 平均等待时长
+- 临近 SLA 占比
+- 自动建议采用率
+- 人工接管占比
+- 会话类型分布
+
+## 🖥️ 页面结构
+
+工作台采用典型的三栏布局：
+
+- 左侧：会话池与队列筛选
+- 中间：当前会话详情、消息线程、AI 建议回复与输入区
+- 右侧：AI 决策、业务上下文与处理辅助信息
+
+顶部区域则承担班次总览、当前处理重点和核心运营指标的表达，用于帮助坐席或班组快速理解当前处理压力和队列结构。
+
+## 🎯 设计重点
+
+这个项目的实现重点不在“做一个聊天页面”，而在于把客服工作台里更关键的部分做完整：
+
+- 任务优先级怎么表达
+- AI 输出如何进入人工流程
+- 风险会话如何被识别和分流
+- 业务上下文如何服务当前决策
+- 信息密度如何既完整又不失控
+
+因此，项目在界面上更关注队列、状态、动作和上下文之间的关系，而不是单一消息气泡样式。
+
+## 🛠️ 技术栈
+
+当前公开版本以静态前端原型为主：
+
+- HTML
+- CSS
+- Vanilla JavaScript
+- Node.js 静态文件服务（本地预览）
+
+仓库中同时保留了部分 Python 侧脚本与接口适配探索代码，用于后续扩展或技术验证：
+
+- `main.py`
+- `DiudiuAgent.py`
+- `DiudiuApis.py`
+- `context_manager.py`
+
+当前 GitHub 展示版本并未将这些能力接入为完整在线后端服务。
+
+## 🚀 快速开始
+
+### 方式一：本地启动静态预览
+
 ```bash
-1. 克隆仓库
-git clone https://github.com/shaxiu/XianyuAutoAgent.git
-cd XianyuAutoAgent
-
-2. 安装依赖
-pip install -r requirements.txt
-
-3. 配置环境变量
-创建一个 `.env` 文件，包含以下内容，也可直接重命名 `.env.example` ：
-#必配配置
-API_KEY=apikey通过模型平台获取
-COOKIES_STR=填写网页端获取的cookie
-MODEL_BASE_URL=模型地址
-MODEL_NAME=模型名称
-#可选配置
-TOGGLE_KEYWORDS=接管模式切换关键词，默认为句号（输入句号切换为人工接管，再次输入则切换AI接管）
-SIMULATE_HUMAN_TYPING=True/False #模拟人工回复延迟
-
-注意：默认使用的模型是通义千问，如需使用其他API，请自行修改.env文件中的模型地址和模型名称；
-COOKIES_STR自行在闲鱼网页端获取cookies(网页端F12打开控制台，选择Network，点击Fetch/XHR,点击一个请求，查看cookies)
-
-4. 创建提示词文件prompts/*_prompt.txt（也可以直接将模板名称中的_example去掉），否则默认读取四个提示词模板中的内容
+cd showcase
+node server.js
 ```
 
-### 使用方法
+默认访问地址：
 
-运行主程序：
-```bash
-python main.py
+```text
+http://127.0.0.1:4173
 ```
 
-### 自定义提示词
+如需自定义端口：
 
-可以通过编辑 `prompts` 目录下的文件来自定义各个专家的提示词：
+```bash
+# PowerShell
+$env:PORT=4180
+node server.js
+```
 
-- `classify_prompt.txt`: 意图分类提示词
-- `price_prompt.txt`: 价格专家提示词
-- `tech_prompt.txt`: 技术专家提示词
-- `default_prompt.txt`: 默认回复提示词
+### 方式二：Windows 一键启动
 
-## 🤝 参与贡献
+直接运行：
 
-欢迎通过 Issue 提交建议或 PR 贡献代码，请遵循 [贡献指南](https://contributing.md/)
+- `showcase/start-local.bat`
 
-## 🧸特别鸣谢
-本项目参考了以下开源项目：
-https://github.com/cv-cat/XianYuApis
+## 🗂️ 仓库结构
 
-感谢<a href="https://github.com/cv-cat">@CVcat</a>的技术支持
+```text
+.
+├─ showcase/                # 当前公开展示重点：前端工作台原型
+│  ├─ index.html
+│  ├─ styles.css
+│  ├─ app.js
+│  ├─ server.js
+│  └─ start-local.bat
+├─ docs/                    # 产品、结构与说明文档
+├─ images/                  # 辅助截图与素材
+├─ eval/                    # 评测相关内容
+├─ prompts/                 # 历史提示词与方案记录
+├─ utils/                   # 工具脚本
+├─ main.py
+├─ DiudiuAgent.py
+├─ DiudiuApis.py
+├─ context_manager.py
+├─ requirements.txt
+└─ Dockerfile
+```
 
-## 🛡 注意事项
+## 📎 当前版本说明
 
-⚠️ 注意：**本项目仅供学习与交流，如有侵权联系作者删除。**
+当前版本重点是工作台前端与交互逻辑验证，具备以下特点：
 
-鉴于项目的特殊性，开发团队可能在任何时间**停止更新**或**删除项目**。
+- 会话数据由前端模拟
+- 指标由当前会话数据动态计算
+- 操作按钮会驱动前端状态变化
+- 页面可独立运行，不依赖真实消息网关或订单系统
 
-如需学习交流，请联系：[coderxiu@qq.com](https://mailto:coderxiu@qq.com/)
+这意味着当前版本适合用于：
 
-## 📱 交流群
-欢迎加入项目交流群，交流技术、分享经验、互助学习。
-<div align="center">
-  <table>
-    <tr>
-      <td align="center"><strong>交流群24（已满200）</strong></td>
-      <td align="center"><strong>交流群25（推荐加入）</strong></td>
-    </tr>
-    <tr>
-      <td><img src="./images/wx_group24.png" width="300px" alt="交流群24"></td>
-      <td><img src="./images/wx_group25.png" width="300px" alt="交流群25"></td>
-    </tr>
-  </table>
-</div>
+- 演示工作台结构
+- 验证信息密度与交互流程
+- 说明 AI 协同处理逻辑
+- 展示客服产品设计与前端实现能力
 
-## 💼 寻找机会
+当前版本尚未接入：
 
-### <a href="https://github.com/shaxiu">@Shaxiu</a>
-**🔍寻求方向**：**AI产品经理**  
-**📫 联系：** **email**:coderxiu@qq.com；**wx:** coderxiu
+- 真实会话服务
+- 真实订单 / 商品 / 用户数据
+- 真实模型推理服务
+- 权限体系与审计链路
+- 质检、报表、知识库等完整后台能力
 
-### <a href="https://github.com/cv-cat">@CVcat</a>
-**🔍寻求方向**：**研发工程师**（python、java、逆向、爬虫）  
-**📫 联系：** **email:** 992822653@qq.com；**wx:** CVZC15751076989
-## ☕ 请喝咖啡
-您的☕和⭐将助力项目持续更新：
+## 🛣️ 后续规划
 
-<div align="center">
-  <img src="./images/wechat_pay.jpg" width="400px" alt="微信赞赏码"> 
-  <img src="./images/alipay.jpg" width="400px" alt="支付宝收款码">
-</div>
+- 将会话数据抽离为独立 mock service 或 JSON 数据层
+- 接入真实会话流与状态同步能力
+- 增加订单阶段、最近消息来源、未读状态等更细粒度调度信号
+- 扩展质检复盘、知识库、策略配置、数据报表等二级页面
+- 接入模型判断服务与规则引擎
+- 补充权限、审计、日志与运营配置能力
 
+## License
 
-## 📈 Star 趋势
-<a href="https://www.star-history.com/#shaxiu/XianyuAutoAgent&Date">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=shaxiu/XianyuAutoAgent&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=shaxiu/XianyuAutoAgent&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=shaxiu/XianyuAutoAgent&type=Date" />
- </picture>
-</a>
-
-
+See [LICENSE](./LICENSE).
