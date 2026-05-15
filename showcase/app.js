@@ -909,7 +909,7 @@ const state = {
     source: "home",
     target: "home",
     title: "当前在工作台总览页",
-    detail: "这里汇总风险、会话、策略和系统级改动，便于主管决定下一步进入哪个模块。",
+    detail: "",
     conversationId: null,
     strategyTab: null,
     settingsSection: null,
@@ -1577,7 +1577,6 @@ function renderHome() {
 
   return `
     <section class="dashboard-home">
-      ${moduleContextNotice()}
       <article class="dashboard-hero">
         <div>
           <p class="section-kicker">Workbench Overview</p>

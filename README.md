@@ -10,7 +10,25 @@
 
 当前开源版本以 `showcase/` 中的 Frontend 演示为核心：它可以独立运行，模拟多栏客服工作台、会话处理流程和运营配置界面。同时，仓库里也保留了早期的 Python 侧探索代码、Prompt 模板、架构文档和 Evaluation 骨架，让整个项目更像一个完整的产品化案例，而不是单一页面。
 
-![AI 智能客服协同工作台预览](./showcase/preview.png)
+![AI 智能客服协同工作台预览](./showcase/1.png)
+
+## 🖼️ 界面截图
+
+### 工作台首页
+
+![工作台首页](./showcase/1.png)
+
+### 对话中心
+
+![对话中心](./showcase/2.png)
+
+### AI 配置台
+
+![AI 配置台](./showcase/3.png)
+
+### 系统设置
+
+![系统设置](./showcase/4.png)
 
 ## ✨ 项目概述
 
@@ -175,7 +193,10 @@ node server.js
 │  ├─ strategy-console.test.js
 │  ├─ strategy-console-data.test.js
 │  ├─ server.js
-│  └─ preview.png
+│  ├─ 1.png
+│  ├─ 2.png
+│  ├─ 3.png
+│  └─ 4.png
 ├─ docs/                             # PRD、架构、部署、演示和定位文档
 ├─ eval/                             # Evaluation 骨架与样例数据
 ├─ prompts/                          # Prompt 示例
