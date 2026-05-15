@@ -62,3 +62,9 @@ htmlcov/
 
 # Git worktrees
 .worktrees/
+
+# Internal workflow / local tooling
+.superpowers/
+docs/superpowers/
+data/
+showcase/.tmp-*.html

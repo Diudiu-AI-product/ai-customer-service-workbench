@@ -5,10 +5,10 @@ import sys
 
 import requests
 from loguru import logger
-from utils.xianyu_utils import generate_sign
+from utils.diudiu_utils import generate_sign
 
 
-class XianyuApis:
+class DiudiuApis:
     def __init__(self):
         self.url = 'https://h5api.m.goofish.com/h5/mtop.taobao.idlemessage.pc.login.token/1.0/'
         self.session = requests.Session()
@@ -95,13 +95,13 @@ class XianyuApis:
         try:
             url = 'https://passport.goofish.com/newlogin/hasLogin.do'
             params = {
-                'appName': 'xianyu',
+                'appName': 'diudiu',
                 'fromSite': '77'
             }
             data = {
                 'hid': self.session.cookies.get('unb', ''),
                 'ltl': 'true',
-                'appName': 'xianyu',
+                'appName': 'diudiu',
                 'appEntrance': 'web',
                 '_csrf_token': self.session.cookies.get('XSRF-TOKEN', ''),
                 'umidToken': '',
@@ -156,7 +156,7 @@ class XianyuApis:
             'sign': '',
             'v': '1.0',
             'type': 'originaljson',
-            'accountSite': 'xianyu',
+            'accountSite': 'diudiu',
             'dataType': 'json',
             'timeout': '20000',
             'api': 'mtop.taobao.idlemessage.pc.login.token',
@@ -267,7 +267,7 @@ class XianyuApis:
             'sign': '',
             'v': '1.0',
             'type': 'originaljson',
-            'accountSite': 'xianyu',
+            'accountSite': 'diudiu',
             'dataType': 'json',
             'timeout': '20000',
             'api': 'mtop.taobao.idle.pc.detail',

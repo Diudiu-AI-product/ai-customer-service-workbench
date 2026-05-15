@@ -5,7 +5,7 @@ from openai import OpenAI
 from loguru import logger
 
 
-class XianyuReplyBot:
+class DiudiuReplyBot:
     def __init__(self):
         # 初始化OpenAI客户端
         self.client = OpenAI(
